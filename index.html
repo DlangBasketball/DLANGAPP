@@ -1,0 +1,41 @@
+import { allOverdueInvoices } from '../data/demoData';
+
+export default function PaymentsScreen({ onOpenComposer }) {
+  return (
+    <section className="screen active">
+      <div className="screen-header">
+        <h1 className="screen-title">Payments</h1>
+        <p className="screen-sub">14 overdue · CHF 5,860 outstanding · TWINT, Apple Pay, card</p>
+      </div>
+
+      <div className="demo-panel">
+        <div className="demo-panel-icon">$</div>
+        <div className="demo-panel-text">
+          <strong>This is where you'd live during month-end.</strong> AI flags overdue invoices across all your programs, drafts personalized reminders, and lets you send the whole batch in 90 seconds. <strong>Click "Draft 14 reminders" on the dashboard</strong> to see it in action.
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title">All overdue invoices</div>
+          <button className="send-button" onClick={onOpenComposer}>
+            Draft reminders with AI →
+          </button>
+        </div>
+        <div className="card-body">
+          {allOverdueInvoices.map((inv, i) => (
+            <div className="invoice-row" key={i}>
+              <div className={`invoice-avatar ${inv.color}`}>{inv.initials}</div>
+              <div>
+                <div className="invoice-name">{inv.name}</div>
+                <div className="invoice-meta">{inv.meta}</div>
+              </div>
+              <div className="invoice-amount">{inv.amount}</div>
+              <span className="invoice-status">Overdue</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,14 @@
+export default function PlaceholderScreen({ title, sub, heading, body }) {
+  return (
+    <section className="screen active">
+      <div className="screen-header">
+        <h1 className="screen-title">{title}</h1>
+        <p className="screen-sub">{sub}</p>
+      </div>
+      <div className="placeholder">
+        <h3>{heading}</h3>
+        <p>{body}</p>
+      </div>
+    </section>
+  );
+}

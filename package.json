@@ -1,0 +1,40 @@
+import { programs } from '../data/demoData';
+
+export default function ProgramsScreen() {
+  return (
+    <section className="screen active">
+      <div className="screen-header">
+        <h1 className="screen-title">Camps & Programs</h1>
+        <p className="screen-sub">7 active programs across 5 locations</p>
+      </div>
+
+      <div className="program-grid">
+        {programs.map((p, i) => (
+          <div
+            className="program-card"
+            key={i}
+            onClick={() => alert(`Would open ${p.name} detail`)}
+          >
+            <div className={`program-cover ${p.coverClass}`}>
+              <span>{p.title}</span>
+              <span className={`program-cover-tag ${p.status === 'Closed' ? 'closed' : ''}`}>
+                {p.status}
+              </span>
+            </div>
+            <div className="program-info">
+              <div className="program-name">{p.name}</div>
+              <div className="program-meta">{p.meta}</div>
+              <div className="program-progress">
+                <div className="program-progress-fill" style={{ width: `${p.progress}%` }}></div>
+              </div>
+              <div className="program-stats">
+                <span>{p.spots}</span>
+                <strong>{p.revenue}</strong>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

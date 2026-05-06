@@ -1,0 +1,17 @@
+import { screenTitles } from '../data/demoData';
+
+export default function Topbar({ activeScreen, onReset }) {
+  return (
+    <div className="topbar">
+      <div className="breadcrumb">
+        <span>DLang Basketball</span>
+        <span>›</span>
+        <strong>{screenTitles[activeScreen] || 'Dashboard'}</strong>
+      </div>
+      <div className="topbar-right">
+        <span className="demo-tag">Demo · For D Lang</span>
+        <button className="topbar-btn" onClick={onReset}>Reset demo</button>
+      </div>
+    </div>
+  );
+}

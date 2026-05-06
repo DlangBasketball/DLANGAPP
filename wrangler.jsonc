@@ -1,0 +1,101 @@
+import { overdueInvoices, attentionItems } from '../data/demoData';
+
+export default function DashboardScreen({ onOpenComposer, onNavigate }) {
+  return (
+    <section className="screen active">
+      <div className="screen-header">
+        <h1 className="screen-title">Good morning, D</h1>
+        <p className="screen-sub">Wednesday, May 6 · Here's where DLang Basketball stands today</p>
+      </div>
+
+      <div className="ai-briefing">
+        <div className="ai-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </div>
+        <div className="ai-briefing-content">
+          <div className="ai-briefing-label">AI Daily briefing</div>
+          <div className="ai-briefing-text">
+            You have <strong>14 overdue invoices</strong> totalling CHF 5,860 across DL Cheetah, DL Unity, and Pro Training. <strong>SPSA Summer Camp 2026 hit 68 of 80 spots</strong> — 4 new registrations overnight. <strong>1 schedule conflict tomorrow</strong>: Mini Ballers and EYBL training both booked SPSA Sport Arena at 16:00.
+          </div>
+          <div className="ai-briefing-actions">
+            <button className="ai-action primary" onClick={onOpenComposer}>
+              Draft 14 reminders →
+            </button>
+            <button className="ai-action" onClick={() => alert('Would open the schedule conflict view in real product')}>
+              Resolve conflict
+            </button>
+            <button className="ai-action" onClick={() => onNavigate('programs')}>
+              See SPSA Summer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="kpi-strip">
+        <div className="kpi">
+          <div className="kpi-label">Outstanding</div>
+          <div className="kpi-value">CHF 5,860</div>
+          <div className="kpi-trend down">↑ 14 invoices overdue</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Collected this month</div>
+          <div className="kpi-value">CHF 32,840</div>
+          <div className="kpi-trend up">↑ 28% vs last month</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Active athletes</div>
+          <div className="kpi-value">312</div>
+          <div className="kpi-trend up">+9 new this month</div>
+        </div>
+        <div className="kpi">
+          <div className="kpi-label">Camp registrations</div>
+          <div className="kpi-value">68/80</div>
+          <div className="kpi-trend up">SPSA Summer · 85% full</div>
+        </div>
+      </div>
+
+      <div className="card-grid">
+        <div className="card">
+          <div className="card-header">
+            <div className="card-title">Overdue invoices</div>
+            <a className="card-link" onClick={() => onNavigate('payments')}>View all →</a>
+          </div>
+          <div className="card-body">
+            {overdueInvoices.map((inv, i) => (
+              <div className="invoice-row" key={i}>
+                <div className={`invoice-avatar ${inv.color}`}>{inv.initials}</div>
+                <div>
+                  <div className="invoice-name">{inv.name}</div>
+                  <div className="invoice-meta">{inv.meta}</div>
+                </div>
+                <div className="invoice-amount">{inv.amount}</div>
+                <span className="invoice-status">Overdue</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header">
+            <div className="card-title">Needs your attention</div>
+          </div>
+          <div className="card-body">
+            {attentionItems.map((item, i) => (
+              <div className="action-card" key={i} onClick={() => alert(`Would open: ${item.title}`)}>
+                <div className="action-card-head">
+                  <span className={`action-card-dot ${item.dot}`}></span>
+                  <span className="action-card-title">{item.title}</span>
+                </div>
+                <div className="action-card-text">{item.text}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
