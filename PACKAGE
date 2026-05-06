@@ -1,0 +1,5 @@
+package.json
+src/
+index.html
+vite.config.js
+public/
